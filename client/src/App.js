@@ -4,6 +4,8 @@ import Login from "./pages/Login/Login";
 import Register from"./pages/Register/Register";
 import Profile from "./pages/Profile/Profile";
 import EditProfile from "./pages/EditProfile/EditProfile";
+import AllStaff from "./pages/EditProfile/AllStaff";
+import AllUsers from "./pages/EditProfile/AllUsers";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/Editprofile" element={<EditProfile />} />
+        <Route path="/AllUsers" element={<AllUsers />} />
+        <Route path="/AllStaff" element={<AllStaff />} />
       </Routes>
     </Router>
   );
