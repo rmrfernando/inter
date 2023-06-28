@@ -1,23 +1,23 @@
 import styled from "styled-components";
 
 const Wrapper = styled.main`
-.container-profile {
-    width: 100vw;
+  .container-profile {
+    /* width: 100vw; */
     height: 100vh;
-   
+
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
   }
-  
+
   h1 {
     font-size: 3rem;
     font-family: "Poppins";
     text-align: center;
     margin-bottom: 0px;
   }
-  
+
   .sub-container-profile {
     display: flex;
     flex-direction: column;
@@ -27,22 +27,21 @@ const Wrapper = styled.main`
     color: black;
     padding: 45px 90px 45px 90px;
     border-radius: 15px;
-
   }
-  
+
   /* .sub-container-profile label {
     padding: 10px 5px 10px 0px;
     font-size: 18px;
   } */
-  
+
   .sub-container-profile button {
     /* padding: 10px 25px; */
-     border-radius: 25px;
-     height:50px;
-     width:200px;
+    border-radius: 25px;
+    height: 50px;
+    width: 200px;
     font-family: "Poppins";
     font-weight: bold;
-    background-color:#006400 ;
+    background-color: #006400;
     align-self: center;
     border: 3px solid #006400;
     color: #fff;
@@ -58,18 +57,16 @@ const Wrapper = styled.main`
     border: 3px solid black;
     transition-duration: 0.4s;
   }
-  .input-right{
+  .input-right {
     margin-top: 20px;
   }
-  .input-left{
-   margin-right: 40px;
+  .input-left {
+    margin-right: 40px;
     margin-top: 20px;
   }
-  .input-label{
-margin-bottom: 6px;
+  .input-label {
+    margin-bottom: 6px;
   }
-  
-  
 `;
 
 export default Wrapper;

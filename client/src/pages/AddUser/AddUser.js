@@ -1,16 +1,35 @@
 import React, { useEffect, useState } from "react";
-import Wrapper from "./EditProfileStyles";
+import Wrapper from "./AddUserStyles";
 import axios from "axios";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import { useAppContext } from "../../context";
 
-const EditProfile = () => {
-  const { user: userData, setUser } = useAppContext();
+const AddUser = () => {
+  const { editId } = useParams();
   const initialState = {
-    ...userData,
+    name: "",
+    phoneNumber: "",
+    address: "",
+    gender: "none",
+    role: "none",
+    email: "",
+    password: "",
   };
 
+  useEffect(() => {
+    const init = async () => {
+      const response = await axios.get(
+        "http://localhost:5000/api/users/one/" + editId
+      );
+      setState(response.data.user);
+    };
+    if (editId) {
+      init();
+    }
+  }, []);
+
   const navigate = useNavigate();
+  const { user: userData, setUser } = useAppContext();
   const [state, setState] = useState(initialState);
 
   const onSubmit = async (e) => {
@@ -18,13 +37,16 @@ const EditProfile = () => {
 
     try {
       let response;
-      response = await axios.patch(
-        `http://localhost:5000/api/users/one/${state._id}`,
-        state
-      );
+      if (!editId) {
+        response = await axios.post(`http://localhost:5000/api/users`, state);
+      } else {
+        response = await axios.patch(
+          `http://localhost:5000/api/users/one/${editId}`,
+          state
+        );
+      }
       const { user } = response.data;
       console.log(user);
-      setUser(user);
       navigate(-1);
     } catch (error) {
       console.log(error);
@@ -33,13 +55,14 @@ const EditProfile = () => {
 
   return (
     <Wrapper>
-      <div className="container-profile">
+      <div className="container">
         <form
-          className="sub-container-profile shadow"
+          className="sub-container shadow"
           id="container"
           onSubmit={onSubmit}
         >
-          <h1 style={{ fontWeight: "bold" }}>Edit Profile</h1>
+          {editId && <h1 style={{ fontWeight: "bold" }}>Edit Profile</h1>}
+          {!editId && <h1 style={{ fontWeight: "bold" }}>Add Profile</h1>}
 
           <div className="d-flex flex-row">
             <div className="input-left" style={{ width: "300px" }}>
@@ -81,11 +104,12 @@ const EditProfile = () => {
             <div className="input-right" style={{ width: "300px" }}>
               <label className="input-label">Gender</label>
               <select
+                defaultValue={"none"}
                 className="form-control"
                 value={state.gender}
                 onChange={(e) => setState({ ...state, gender: e.target.value })}
               >
-                <option value="none" selected disabled hidden>
+                <option value="none" disabled hidden>
                   Select gender
                 </option>
                 <option value="male">Male</option>
@@ -97,38 +121,48 @@ const EditProfile = () => {
           <div className="d-flex flex-row">
             <div className="input-left" style={{ width: "300px" }}>
               <label className="input-label">Role</label>
-              <input
+              <select
+                disabled={editId}
                 className="form-control"
-                disabled
                 value={state.role}
                 onChange={(e) => setState({ ...state, role: e.target.value })}
-              ></input>
+              >
+                <option value="none" selected disabled hidden>
+                  Select role
+                </option>
+                <option value="user">User</option>
+                <option value="staff">Staff</option>
+                <option value="admin">Admin</option>
+              </select>
             </div>
             <div className="input-right" style={{ width: "300px" }}>
               <label className="input-label">Email</label>
               <input
                 className="form-control"
                 type="email"
-                disabled
+                disabled={editId}
                 placeholder="Enter email"
                 value={state.email}
                 onChange={(e) => setState({ ...state, email: e.target.value })}
               />
             </div>
           </div>
-          <div className="d-flex flex-row">
-            <div className="input-left" style={{ width: "300px" }}>
-              <label className="input-label">Password</label>
-              <input
-                type="password"
-                className="form-control"
-                value={state.password}
-                onChange={(e) =>
-                  setState({ ...state, password: e.target.value })
-                }
-              ></input>
+          {!editId && (
+            <div className="d-flex flex-row">
+              <div className="input-left" style={{ width: "300px" }}>
+                <label className="input-label">Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  value={state.password}
+                  onChange={(e) =>
+                    setState({ ...state, password: e.target.value })
+                  }
+                ></input>
+              </div>
             </div>
-          </div>
+          )}
+          <br />
           <button type="submit" className="btn btn-primary shadow-sm ">
             Submit
           </button>
@@ -138,4 +172,4 @@ const EditProfile = () => {
   );
 };
 
-export default EditProfile;
+export default AddUser;

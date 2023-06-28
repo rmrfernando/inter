@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 const Wrapper = styled.main`
   .container-profile {
-    width: 100vw;
     height: 100vh;
 
     display: flex;

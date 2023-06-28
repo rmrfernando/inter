@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 const Wrapper = styled.main`
-  .container-profile {
-    /* width: 100vw; */
+  .container {
     height: 100vh;
 
     display: flex;
@@ -11,14 +10,7 @@ const Wrapper = styled.main`
     flex-direction: column;
   }
 
-  h1 {
-    font-size: 3rem;
-    font-family: "Poppins";
-    text-align: center;
-    margin-bottom: 50px;
-  }
-
-  .sub-container-profile {
+  .sub-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,13 +21,19 @@ const Wrapper = styled.main`
     border-radius: 15px;
   }
 
-  .sub-container-profile label {
-    padding: 10px 5px 10px 0px;
-    font-size: 18px;
+  .input-right {
+    margin-top: 20px;
+  }
+  .input-left {
+    margin-right: 40px;
+    margin-top: 20px;
+  }
+  .input-label {
+    margin-bottom: 6px;
   }
 
-  .sub-container-profile button {
-    /* padding: 10px 25px; */
+  .sub-container button {
+    padding: 10px 25px;
     border-radius: 25px;
     height: 50px;
     width: 200px;
@@ -46,23 +44,16 @@ const Wrapper = styled.main`
     border: 3px solid #006400;
     color: #fff;
     box-shadow: 2px 2px 3.5px rgba(0, 0, 0, 0.358);
-    margin: 30px 0px 15px 140px;
+    margin: 30px 0px 15px 20px;
     cursor: pointer;
   }
-  .sub-container-profile button:hover {
+  .sub-container button:hover {
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.358);
     background-color: #fff;
     color: black;
     font-weight: bold;
     border: 3px solid black;
     transition-duration: 0.4s;
-  }
-  .right {
-    width: 250px;
-  }
-  .left {
-    width: 150px;
-    margin-right: 100px;
   }
 `;
 
